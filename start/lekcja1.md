@@ -100,14 +100,17 @@ Nagle, przy uruchomieniu, pojawiła się czarna konsola znikąd i:
  
 Na razie nasz kod jest prawie pusty i dlatego też niewiele robi. Spójrzmy po kolei, co my tutaj mamy:
 
- * `#include <iostream>`  
- Ta linijka mówi dosłownie, żeby kompilator fizycznie znalazł plik o nazwie `iostream` gdzieś na dysku (prawdopodobnie znajduje się w jednym z podfolderów kompilatora), a następnie całą jego zawartość skopiował do pliku, w którym tą linijkę napisaliśmy - *main.cpp*  
- C++, w czystej formie, nie posiada wielu rzucających się w oczy funkcjonalności. Możemy co prawda wykonywać mnóstwo operacji logicznych, arytmetycznych itp. ale nie zobaczymy ich wyniku.  
- Z pomocą przyszli nam programiści tzw. **biblioteki standardowej C++**, którzy zaprogramowali dla nas mnóstwo ciekawych narzędzi, z których możemy do woli korzystać. Tak właśnie jest z wejściem i wyjściem konsoli. Możemy za pomocą **wyjścia** *(ang.: output)* wyprowadzić dane (np. tekst) do konsolki i tym samym sprawić, że użytkownik to zobaczy. Aby zyskać właśnie dostęp do wejścia i wyjścia konsoli dołączamy *(ang.: include)* do kodu plik `iostream`. Nazwa *iostream* dosłownie jest zlepkiem angielskich wyrazów "*input/output stream*" czyli "*strumienie (danych) wejścia i wyjścia*".  
- * Rzućmy okiem na ten kod:
+ * Dodawanie zewnętrznych funkcjonalności:
+	```cpp
+	#include <iostream>
+	```
+	Ta linijka mówi dosłownie, żeby kompilator fizycznie znalazł plik o nazwie `iostream` gdzieś na dysku (prawdopodobnie znajduje się w jednym z podfolderów kompilatora), a następnie całą jego zawartość skopiował do pliku, w którym tą linijkę napisaliśmy - *main.cpp*  
+	C++, w czystej formie, nie posiada wielu rzucających się w oczy funkcjonalności. Możemy co prawda wykonywać mnóstwo operacji logicznych, arytmetycznych itp. ale nie zobaczymy ich wyniku.  
+	Z pomocą przyszli nam programiści tzw. **biblioteki standardowej C++**, którzy zaprogramowali dla nas mnóstwo ciekawych narzędzi, z których możemy do woli korzystać. Tak właśnie jest z wejściem i wyjściem konsoli. Możemy za pomocą **wyjścia** *(ang.: output)* wyprowadzić dane (np. tekst) do konsolki i tym samym sprawić, że użytkownik to zobaczy. Aby zyskać właśnie dostęp do wejścia i wyjścia konsoli dołączamy *(ang.: include)* do kodu plik `iostream`. Nazwa *iostream* dosłownie jest zlepkiem angielskich wyrazów "*input/output stream*" czyli "*strumienie (danych) wejścia i wyjścia*".  
+ * Główna funkcja programu:
  	```cpp
-    int main()
+	int main()
 	{
 	}
 	```
- TODO:
+ 	TODO:
