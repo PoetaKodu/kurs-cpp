@@ -77,7 +77,8 @@ Po pierwsze - ostrzeżenie: Visual Studio jest dość obszernym środowiskiem, t
 
 Nareszcie przyszedł ten moment: pisanie kodu!  
 Ostrzegam, że w pierwszych momentach będzie trochę "zaufaj, że tak zadziała", ale spokojnie, po chwili się wszystko wyklaruje.
-Na początku nasze IDE wygeneruje nam początkowy kod, ale my go usuniemy. Wpisujemy coś takiego:
+Na początku nasze IDE wygeneruje nam początkowy kod, ale my go usuniemy.  
+Wpisujemy coś takiego:
 
 ```cpp
 #include <iostream>
@@ -88,5 +89,25 @@ int main()
 }
 ```
 
-**Kompilujemy program** (sposób przedstawiłem w wyżej przedstawionym filmie).  
+**Kompilujemy i uruchamiamy program** (sposób przedstawiłem w wyżej przedstawionym filmie).  
+Co tu się właściwie stało?  
+Nagle, przy uruchomieniu, pojawiła się czarna konsola znikąd i:
 
+ * w ciągu ułamka sekundy znikła  
+ *(efekt dla ręcznego uruchomienia programu lub środowiska Visual Studio)*
+ * w konsoli pojawił się tekst `Witaj swiecie!`, kilka linijek niżej parę innych informacji i konsolka czeka aż się ją zamknie  
+ *(efekt dla uruchamiania z poziomu Code Blocks - te kilka dodatkowych linijek to informacje statystyczne, które podaje nam Code::Blocks, na końcu też zatrzymuje działanie programu)*
+ 
+Na razie nasz kod jest prawie pusty i dlatego też niewiele robi. Spójrzmy po kolei, co my tutaj mamy:
+
+ * `#include <iostream>`  
+ Ta linijka mówi dosłownie, żeby kompilator fizycznie znalazł plik o nazwie `iostream` gdzieś na dysku (prawdopodobnie znajduje się w jednym z podfolderów kompilatora), a następnie całą jego zawartość skopiował do pliku, w którym tą linijkę napisaliśmy - *main.cpp*  
+ C++, w czystej formie, nie posiada wielu rzucających się w oczy funkcjonalności. Możemy co prawda wykonywać mnóstwo operacji logicznych, arytmetycznych itp. ale nie zobaczymy ich wyniku.  
+ Z pomocą przyszli nam programiści tzw. **biblioteki standardowej C++**, którzy zaprogramowali dla nas mnóstwo ciekawych narzędzi, z których możemy do woli korzystać. Tak właśnie jest z wejściem i wyjściem konsoli. Możemy za pomocą **wyjścia** *(ang.: output)* wyprowadzić dane (np. tekst) do konsolki i tym samym sprawić, że użytkownik to zobaczy. Aby zyskać właśnie dostęp do wejścia i wyjścia konsoli dołączamy *(ang.: include)* do kodu plik `iostream`. Nazwa *iostream* dosłownie jest zlepkiem angielskich wyrazów "*input/output stream*" czyli "*strumienie (danych) wejścia i wyjścia*".  
+ * Rzućmy okiem na ten kod:
+ 	```cpp
+    int main()
+	{
+	}
+	```
+ TODO:
