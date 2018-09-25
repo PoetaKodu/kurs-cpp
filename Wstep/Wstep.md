@@ -9,5 +9,5 @@
 
 <p align="right">
 	Następna lekcja:<br>
-	<a href="AbsolutnePodstawy.md">Wstęp &gt; Absolutne podstawy</a>
+	<a href="AbsolutnePodstawy.md">Wstęp &gt; Absolutne podstawy &gt;&gt;&gt;</a>
 </p>

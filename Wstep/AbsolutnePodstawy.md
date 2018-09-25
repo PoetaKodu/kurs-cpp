@@ -46,6 +46,11 @@ Dzieje się tak dlatego, że program zaraz po zakończeniu swojego działania (c
 
 ![Wynik programu Hello World][img hello-world]
 
+<p>
+	Poprzednia lekcja lekcja:<br>
+	<a href="Wstep.md">&lt;&lt;&lt; Wstęp</a>
+</p>
+
 <!-- Links and images -->
 [img executable-in-notepad]: Images/ExecutableInNotepad.png
 [img compilation]: Images/Compilation.png
