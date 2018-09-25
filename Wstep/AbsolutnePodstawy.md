@@ -50,7 +50,7 @@ Dzieje się tak dlatego, że program zaraz po zakończeniu swojego działania (c
 <!-- Next and previous lesson -->
 <hr>
 <p>
-	Poprzednia lekcja lekcja:<br>
+	Poprzednia lekcja:<br>
 	<a href="Wstep.md">&lt;&lt;&lt; Wstęp</a>
 </p>
 
