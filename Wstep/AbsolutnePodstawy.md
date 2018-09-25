@@ -1,4 +1,4 @@
-# Wstęp > Absolutne podstawy
+# [Wstęp](Wstep.md) > Absolutne podstawy
 ### <div align="right">Kurs C++ `by Poeta Kodu`</div>
 
 ## Czym jest programowanie
