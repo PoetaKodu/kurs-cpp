@@ -3,7 +3,7 @@
 
 ## Czym jest programowanie
 
-Programowanie pozwala nam określać co krok po kroku ma wykonać program, który tworzymy. Może on się uruchamiać na komputerze, na telefonie, mikrokontrolerze, który np. steruje jakimś robotem, czy np. w sprzęcie AGD.
+Programowanie pozwala nam określać, co krok po kroku ma wykonać program, który tworzymy. Może on się uruchamiać na komputerze, na telefonie, mikrokontrolerze, który np. steruje jakimś robotem, czy też na elektronice sprzętu AGD.
 
 Dzięki programowaniu możesz korzystać z komputera, czytać na nim właśnie ten kurs w oknie przeglądarki czy przeglądać portale społecznościowe. Właściwie z programowaniem mamy do czynienia, w każdej sytuacji, gdzie ustalamy dokładnie krok po kroku zachowanie czegoś, za pomocą poleceń.
 
@@ -46,6 +46,8 @@ Dzieje się tak dlatego, że program zaraz po zakończeniu swojego działania (c
 
 ![Wynik programu Hello World][img hello-world]
 
+<!-- Next and previous lesson -->
+<hr>
 <p>
 	Poprzednia lekcja lekcja:<br>
 	<a href="Wstep.md">&lt;&lt;&lt; Wstęp</a>
