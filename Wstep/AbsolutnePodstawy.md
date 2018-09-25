@@ -1,6 +1,8 @@
 # Wstęp > Absolutne podstawy
 ### <div align="right">Kurs C++ `by Poeta Kodu`</div>
 
+## Czym jest programowanie
+
 Programowanie pozwala nam określać co krok po kroku ma wykonać program, który tworzymy. Może on się uruchamiać na komputerze, na telefonie, mikrokontrolerze, który np. steruje jakimś robotem, czy np. w sprzęcie AGD.
 
 Dzięki programowaniu możesz korzystać z komputera, czytać na nim właśnie ten kurs w oknie przeglądarki czy przeglądać portale społecznościowe. Właściwie z programowaniem mamy do czynienia, w każdej sytuacji, gdzie ustalamy dokładnie krok po kroku zachowanie czegoś, za pomocą poleceń.
@@ -12,7 +14,7 @@ Polecenia wydaje się przy użyciu języków programowania. Mimo różnic międz
 - **jest wieloplatformowy** - można programować w nim w taki sposób, by ten sam kod działał uruchamiany na różnych systemach operacyjnych, np. na Windowsie, Linuxie czy Androidzie.
 - **jest ogólnego użytku** - można go używać do programowania gier, aplikacji biurowych, aplikacji mobilnych czy mikrokontrolerów
 
-Programista zwykle zapisuje swój kod do osobnego pliku. Początkowo spotkasz się często z nazwą `Main.cpp`, lub innymi do niej podobnymi, co po prostu oznacza, że jest to plik główny programu (z ang. `main` = główny) z kodem źródłowym napisanym w języku Cpp (`C++` = `C Plus Plus` = `Cpp`, lub czasem `CXX`).
+Programista zwykle zapisuje swój kod do osobnego pliku. Początkowo spotkasz się często z nazwą `Main.cpp`, lub innymi do niej podobnymi, co po prostu oznacza, że jest to plik główny programu (z ang. *main* oznacza *główny*) z kodem źródłowym napisanym w języku Cpp (`C++` = `C Plus Plus` = `Cpp`, lub czasem `CXX`).
 
 ## Uruchamianie napisanego kodu
 
@@ -37,8 +39,14 @@ Ale w takiej formie musimy dostarczyć nasz kod komputerowi. To co widać u gór
 
 ![Proces kompilacji kodu źródłowego][img compilation]
 
+Gdy już przejdziesz przez proces kompilacji, dostaniesz swoją gotową aplikację. W przypadku naszego "Hello World", oczekujemy że zobaczymy takie właśnie powitanie.
 
+**Jeśli spróbujesz uruchomić tą aplikację, pojawi się czarna konsola, która najprawdopodobniej zdąży zniknąć zanim w ogóle ją zauważysz.**
+Dzieje się tak dlatego, że program zaraz po zakończeniu swojego działania (czyli wyświetleniu napisu "Hello World") zamyka się. Możesz zapobiec temu w prosty sposób - uruchamiając aplikację poprzez terminal, czy też konsolkę systemową. Warto o tym pamiętać w przyszłości. Tak wygląda wynik na moim komputerze:
+
+![Wynik programu Hello World][img hello-world]
 
 <!-- Links and images -->
 [img executable-in-notepad]: Images/ExecutableInNotepad.png
 [img compilation]: Images/Compilation.png
+[img hello-world]: Images/HelloWorld.png
