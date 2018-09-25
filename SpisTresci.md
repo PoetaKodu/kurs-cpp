@@ -44,7 +44,7 @@
 <!-- ================== LINKS ================== -->
 
 <!-- Intro -->
-[intro]: README.md
+[intro]: Wstep/Wstep.md
 
 [intro basics]: README.md
 [intro install-gcc]: README.md
