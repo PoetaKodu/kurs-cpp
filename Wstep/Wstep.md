@@ -1,2 +1,2 @@
 # Kurs > Wstęp
-### <div align="right">Kurs C++ `by Poeta Kodu`</div>
+<p align="right">Kurs C++ `by Poeta Kodu`</p>
