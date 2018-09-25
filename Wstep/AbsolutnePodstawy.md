@@ -54,4 +54,4 @@ Dzieje się tak dlatego, że program zaraz po zakończeniu swojego działania (c
 <!-- Links and images -->
 [img executable-in-notepad]: Images/ExecutableInNotepad.png
 [img compilation]: Images/Compilation.png
-[img hello-world]: Images/HelloWorld.png
+[img hello-world]: Images/OutputHelloWorld.png
