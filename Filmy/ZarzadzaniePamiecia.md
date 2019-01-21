@@ -1,5 +1,14 @@
 # Zarządzanie pamięcią w C++
 
+### Autorzy
+- Główny: Paweł Syska (*Poeta Kodu*).
+- Poprawki:
+  - *uzupełnić listę osób, które wprowadzały poprawki do materiału*
+
+
+Materiał przeznaczony na film na kanale Poeta Kodu. Zastrzegam sobie wyłączne prawo do użycia tego materiału w filmie.
+
+Materiał zaczyna się tutaj:
 
 ## Czym jest pamięć operacyjna?
 
@@ -141,7 +150,7 @@ Wtedy nie musimy się martwić o to, że nasza tablica nie zostanie zwolniona w 
 ```
 <!-- Koniec przykładu -->
 
-W praktyce, w `DynamicArray` brakuje jeszcze paru rzeczy, ale w tym filmie możemy to pominąć... bo rada dla programistów C++ jest taka, żeby korzystać z kontenerów z biblioteki standardowej. Jeśli potrzebujesz tablicy o zmiennym rozmiarze, użyj `std::vector`. Oto porównanie kodu wcześniejszego kodu z rzucaniem wyjątku i zmianą rozmiaru tablicy z kodem, który robi to samo... ale używa `std::vector` z biblioteki standardowej.
+W praktyce, w `DynamicArray` brakuje jeszcze paru rzeczy, ale w tym filmie możemy to pominąć... bo rada dla programistów C++ jest taka, żeby korzystać z kontenerów z biblioteki standardowej. Jeśli potrzebujesz tablicy o zmiennym rozmiarze, użyj `std::vector`. Oto porównanie wcześniejszego kodu z rzucaniem wyjątku i zmianą rozmiaru tablicy z kodem, który robi to samo... ale używa `std::vector` z biblioteki standardowej.
 
 <!--  Przykład, gdzie nastąpi: -->
 ```cpp
@@ -161,11 +170,11 @@ throw std::runtime_error("jakis wyjatek");
 ```
 <!-- Koniec przykładu -->
 
-Prawda, że prościej, łatwiej i przyjemniej? Nie używajcie zwykłych zwykłych tablic.
+Prawda, że prościej, łatwiej i przyjemniej? Nie używajcie zwykłych tablic.
 
 ## Dynamiczna alokacja i obiekty
 
-Wiemy już co robić w przypadku tablic. A co jeśli chcemy stworzyć dynamicznie obiekt i mieć pewność, że zostanie poprawnie zwolniony? W tym wypadku również korzystamy z biblioteki standardowej i specjalnie przygotowanych inteligentnych wskaźników, po angielsku nazywanych *smart pointerami*. Smart pointery to specjalnie przygotowane klasy, tak jak wcześniej pokazane `DynamicArray`, które służą właśnie do tego, by automatycznie zarządzać zaalokowaną pamięcią. Należy teraz wprowadzić pojęcia:
+Wiemy już co robić w przypadku tablic. A co jeśli chcemy stworzyć dynamicznie obiekt i mieć pewność, że zostanie poprawnie zwolniony? W tym wypadku również korzystamy z biblioteki standardowej i specjalnie przygotowanych inteligentnych wskaźników, po angielsku nazywanych *smart pointerami*. Smart pointery to specjalnie przygotowane klasy, tak jak wcześniej pokazane `DynamicArray`, które służą właśnie do tego, by automatycznie zarządzać zaalokowaną pamięcią. Trzeba teraz wprowadzić pojęcia:
 
 - owning pointer (wskaźnik właściciel)
 - non-owning pointer (wskaźnik niebędący właścicielem)
@@ -175,17 +184,91 @@ Wskaźnik niebędący właścicielem to zwykły wskaźnik taki jak znamy z C++, 
 
 W C++ istnieją dwa inteligentne wskaźniki i jeden "pomocniczy" inteligentny wskaźnik:
 
-- unique_ptr - unikalny wskaźnik
-- shared_ptr - wskaźnik współdzielony
-- weak_ptr - "słaby" wskaźnik (pomocniczy)
+- `unique_ptr` - unikalny wskaźnik
+- `shared_ptr` - wskaźnik współdzielony
+- `weak_ptr` - "słaby" wskaźnik (pomocniczy)
 
-`unique_ptr` jest zawsze **JEDYNYM**, unikalnym właścicielem obiektu. To czas życia `unique_ptr` decyduje o tym, ile będzie żył obiekt, na który wskazuje. Niszczony jest wskaźnik, niszczony jest też obiekt. W zdecydowanej większości będziecie korzystać właśnie z tego typu smart pointera.
+`unique_ptr` jest zawsze **JEDYNYM**, unikalnym właścicielem obiektu. To czas życia `unique_ptr` decyduje o tym, ile będzie żył obiekt, na który wskazuje. Kiedy niszczony jest wskaźnik, to niszczony jest też obiekt. W zdecydowanej większości będziecie korzystać właśnie z tego typu smart pointera.
 
-`shared_ptr` jest jednym z wielu wskaźników, które wspólnie odnoszą się do jednego obiektu w pamięci. Kiedy `shared_ptr` jest niszczony, to działa to na zasadzie "ostatni zamyka drzwi", czyli dopiero ostatni `shared_ptr` niszczy też obiekt, na który wskazywał. Jest on wolniejszy niż `unique_ptr`, jednak czasem niezbędny, np. gdy nasz program posiada wiele wątków, z których chcemy dostać się do jednego obiektu w pamięci.
+`shared_ptr` jest jednym z wielu wskaźników, które wspólnie odnoszą się do jednego obiektu w pamięci. Kiedy `shared_ptr` jest niszczony, to działa to na zasadzie "ostatni zamyka drzwi", czyli dopiero ostatni `shared_ptr` niszczy też obiekt, na który wskazywał. Jest on wolniejszy niż `unique_ptr`, jednak czasem niezbędny, np. gdy nasz program posiada wiele wątków, z których chcemy dostać się do jednego obiektu w pamięci, albo gdy np. mamy 10 modeli w grze, z których każdy korzysta z tej samej tekstury i chcemy, aby sama tekstura została zwolniona z pamięci, dopiero gdy ostatni model przestanie istnieć.
 
-`weak_ptr` to słaby wskaźnik, który współpracuje z `shared_ptr`-ami. Nie bierze on udziału w metodzie "ostatni zamyka drzwi". Nawet jeśli do danego obiektu w pamięci będzie istniało jeszcze 100 `weak_ptr`-ów, to wciąż, ostatni `shared_ptr` zwolni po sobie obiekt. `weak_ptr` służy do tego, by móc sprawdzić, czy obiekt, na który wskazuje, jeszcze istnieje... i jeśli tak, to możemy użyć go do stworzenia `shared_ptr`, żeby się do niego odwołać.
+`weak_ptr` to słaby wskaźnik, który współpracuje z `shared_ptr`-ami. Nie bierze on udziału w metodzie "ostatni zamyka drzwi". Nawet jeśli do danego obiektu w pamięci będzie istniało jeszcze 100 `weak_ptr`-ów, to wciąż, ostatni `shared_ptr` zwolni po sobie obiekt. `weak_ptr` służy do tego, by móc sprawdzić, czy obiekt, na który wskazuje, jeszcze istnieje... i jeśli tak, to możemy użyć tego `weak_ptr`-a do stworzenia `shared_ptr`, żeby się odwołać do obiektu.
 
-Każdy z tych wskaźników znajdzie swoje zastosowanie, które zaraz pokażę.
+Każdy z tych wskaźników znajdzie swoje zastosowanie, które zaraz pokażę. Najpierw jednak kluczowa i najważniejsza zasada w zarządzaniu pamięcią z użyciem smart pointerów.
+Inteligentne wskaźniki służą do kontrolowania czasu życia obiektu **i przede wszystkim do tego**. Mogła się pojawić wątpliwość, u kogoś z oglądających, że przecież skoro mamy jednego właściciela, w postaci `unique_ptr`, to jak ja przekażę ten wskaźnik do funkcji? W tym momencie...
+ <!-- Tutaj pokazanie na moment wywołania funkcji  -->
+ <!-- Przykład -->
+```cpp
+void addTen(std::unique_ptr<int> ptr_) {
+		*ptr_ += 10;
+}
+int main() {
+	std::unique_ptr<int> x = new int(20);
+	// TUTAJ:
+	addTen(x);
+}
+```
+ <!--  -->
+...wskaźnik będzie musiał zostać skopiowany, a więc będą istniały dwa unikalne wskaźniki do jednego obiektu w pamięci, co jest przecież zabronione. **I TO JEST PRAWDA**. Przy kompilacji tego kodu, dostaniemy błąd od kompilatora. Nie możemy skopiować `unique_ptr`. W tym wypadku mamy trzy wyjścia:
+
+- przekazać surowy, zwykły wskaźnik do `int`-a, czyli "ten z gwiazdką" 
+- przekazać referencję do `int`-a
+- przenieść "odpowiedzialność" nad zaalokowanym `int`-em na wskaźnik `ptr_` w funkcji `addTen`.
+
+<!-- Przykłady powyższej listy -->
+<!-- Przykład 1 -->
+```cpp
+void addTen(int* ptr_) {
+	 *ptr_ += 10;
+}
+int main() {
+	std::unique_ptr<int> x = new int(20);
+	// funkcja get() zwraca surowy wskaźnik
+	addTen(x.get());
+}
+```
+<!-- Przykład 2 -->
+```cpp
+void addTen(int& ref_) {
+	 ref_ += 10;
+}
+int main() {
+	std::unique_ptr<int> x = new int(20);
+	// operator dereferencji (czyli *x), działa tak samo
+	// jak na zwykłym wskaźniku
+	addTen(*x);
+}
+```
+<!-- Przykład 2 -->
+```cpp
+void addTen(std::unique_ptr<int> ptr_) {
+	*ptr_ += 10;
+}
+int main() {
+	std::unique_ptr<int> x = new int(20);
+	// używamy std::move, aby przenieść "odpowiedzialność"
+	addTen(std::move(x));
+	// po wykonaniu tej funkcji "x" jest pustym wskaźnikiem.
+}
+```
+<!-- Koniec przykładów -->
+
+Musimy się liczyć z tym, z czym wiąże się użycie każdego z tych sposobów. Funkcja, która przyjmuje zwykły wskaźnik dopuszcza podanie pustego wskaźnika, czyli `nullptr`. Funkcja, która wymaga przeniesienia odpowiedzialności, już na pierwszy rzut oka mówi programiście, że to ona od teraz zajmie się zarządzaniem czasem życia obiektu. Najlepszym wyjściem tutaj będzie użycie referencji. Zadaniem tej funkcji jest zwiększenie wartości jakiegoś `int`-a o 10, więc od razu zakładamy, że taki `int` musi istnieć, więc nie pozwalamy na podanie `nullptr`-a. No i przede wszystkim, ta funkcja nic innego nie robi, więc nie potrzebna jest jej odpowiedzialność nad tym `int`-em.
+
+Bardzo podobnie jest w przypadku `shared_ptr`-ów. Jeśli funkcja ma wykonać tylko jakąś operację na tym, do czego odnosi się `shared_ptr` to używamy referencji. Jeśli z jakiegoś powodu, ta rzecz może nie istnieć, to podajemy wskaźnik. Dopiero, jeśli funkcja zarządza czasem życia obiektu, podajemy tam odpowiedni, inteligentny wskaźnik. **Błędnym** jest przekonanie, że zwykłe, surowe wskaźniki zostały wyparte przez te inteligentne. Surowe wskaźniki **NIGDY** nie powinny być używane do zarządzania czasem życia obiektu, ale są idealne jako sposób do "dostania" się do obiektu, jego właściwości itd.
 
 ## Przykłady użycia unique_ptr
 
+TODO
+
+## Przykłady użycia shared_ptr
+
+TODO
+
+## Przykłady użycia weak_ptr
+
+TODO
+
+## Zakończenie
+
+TODO
