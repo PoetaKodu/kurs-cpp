@@ -5,7 +5,7 @@
 
 Pamięć operacyjna (czyli RAM) to miejsce na najróżniejsze dane dla programów, które aktualnie są uruchomione na komputerze. Kiedy, przykładowo, uruchamiamy grę, to jej "ładowanie" odnosi się właśnie do tego, że bierze ona dane, takie jak np. tekstury, modele, dźwięki **z dysku** i zapisuje je do znacznie szybszej pamięci operacyjnej. Każdemu programowi, a dokładniej procesowi, system operacyjny przydziela pulę pamięci, czyli tzw. pamięć wirtualną procesu. Kiedy program potrzebuje więcej miejsca, to wysyła odpowiednią prośbę do systemu operacyjnego, a kiedy dane miejsce nie jest już używane, to niejako mówi systemowi: "*tego miejsca już nie używam, rób z tym co chcesz*".
 
-W sytuacji, kiedy na komputerze używamy większej liczby programów na raz, tej pamięci może zabraknąć. Niektórych barier się nie przeskoczy, bo ciężko jest oczekiwać, że na komputerze z zainstalowanymi... 2GB RAMu uruchomimy jednocześnie przeglądarkę, grę, film w tle i program do edycji filmów. Problemem jest jednak sytuacja, w której program używa zbyt dużo pamięci, bez szczególnej potrzeby, ze względu na to, że programista go źle zaprojektował. Weźmy na przykład taką prostą sytuację: gra strategiczna, w której możemy tworzyć nowe jednostki wojowników. W trakcie gry wiele jednostek jest tworzonych i część z nich np. umrze podczas walki. Wtedy taki wojownik powinien zostać usunięty z pamięci, bo już nie jest w grze używany. Jeśli programista nie umie poprawnie zarządzać pamięcią i nie będzie zwalniał jej po tym poległym wojowniku, to pamięć użyta przez grę będzie puchła... i puchła a w najgorszym wypadku zabraknie pamięci operacyjnej komputerowi i system pewnie automatycznie zamknie proces gry. Z sytuacjami, gdzie może nastąpić **wyciek pamięci** (bo tak właśnie się to nazywa) programiści spotykają się... stale i przez to jest to takie ważne. Bardziej szczegółowo, wyciek pamięci to sytuacja, w której niepotrzebna, nigdzie już nieużywana pamięć pozostaje w pamięci procesu a my tracimy ostatnią szansę, żeby ją zwolnić, bo nie mamy już żadnego "odnośnika" (czy, mówiąc bardziej po programistycznemu, wskaźnika) do tego, gdzie ta pamięć się znajduje, więc będzie ona sobie tak trwała, zaalokowana, nieużywana do końca życia procesu.
+W sytuacji, kiedy na komputerze używamy większej liczby programów na raz, tej pamięci może zabraknąć. Niektórych barier się nie przeskoczy, bo ciężko jest oczekiwać, że na komputerze z zainstalowanymi... 2GB RAMu uruchomimy jednocześnie przeglądarkę, grę, film w tle i program do edycji filmów. Problemem jest jednak sytuacja, w której program używa zbyt dużo pamięci, bez szczególnej potrzeby, ze względu na to, że programista go źle zaprojektował. Weźmy na przykład taką prostą sytuację: gra strategiczna, w której możemy tworzyć nowe jednostki wojowników. W trakcie gry wiele jednostek jest tworzonych i część z nich np. umrze podczas walki. Wtedy taki wojownik powinien zostać usunięty z pamięci, bo już nie jest w grze używany. Jeśli programista nie umie poprawnie zarządzać pamięcią i nie będzie zwalniał jej po tym poległym wojowniku, to pamięć użyta przez grę będzie puchła... i puchła a w najgorszym wypadku zabraknie pamięci operacyjnej komputerowi i system pewnie automatycznie zamknie proces gry. Z sytuacjami, gdzie może nastąpić **wyciek pamięci** (bo tak właśnie się to nazywa) programiści spotykają się... stale i przez to jest to takie ważne. Bardziej szczegółowo, wyciek pamięci to sytuacja, w której niepotrzebna, nigdzie już nieużywana pamięć pozostaje zabrana przez proces a my tracimy ostatnią szansę, żeby ją zwolnić, bo nie mamy już żadnego "odnośnika" (czy, mówiąc bardziej po programistycznemu, wskaźnika) do tego, gdzie ta pamięć się znajduje, więc będzie ona sobie tak trwała, zaalokowana, nieużywana do końca życia procesu.
 
 ## Pamięć w języku C++
 
@@ -22,7 +22,7 @@ Warto jednak trochę powiedzieć o alokacji automatycznej. To właśnie z nią m
 
 ## Alokacja dynamiczna i jej ryzyko
 
-Alokacja dynamiczna jest w całości powierzona programiście. To jego zadaniem jest zadbać o to, by we właściwym momencie zwolnić pamięć. Daje to duże możliwości, ale też stwarza zagrożenie właśnie w postaci wycieku pamięci. Alokacji dynamicznej używa się np., gdy chcemy stworzyć tablicę o liczbie elementów, która nie jest znana już w momencie pisania kodu (tzw. *compile-time*), czyli np. zależy od tego co użytkownik poda. Pamiętajmy o tym, że taki zapis w C++ jest niedozwolony!
+Alokacja dynamiczna jest w całości powierzona programiście. To on manualnie, jawnie, samemu decyduje gdzie zaalokuje i gdzie zwolni pamięć... i to w jego interesie jest, żeby zadbać o to, by nie dopuścić do powstania wycieku pamięci. Daje to duże możliwości, ale też stwarza zagrożenie. Alokacji dynamicznej używa się np., gdy chcemy stworzyć tablicę o liczbie elementów, która nie jest znana już w momencie pisania kodu (w tzw. *compile-time*), czyli np. zależy od tego co użytkownik programu wpisze do konsoli. Pamiętajmy o tym, że taki zapis w C++ jest niedozwolony!
 
  <!-- Przykład: -->
 ```cpp
@@ -32,7 +32,7 @@ int tab[n]; // niedozwolone!
 ```
 <!-- Koniec przykładu -->
 
-Musisz w tym przypadku zaalokować tablicę dynamicznie. Tablice w C++ jako tako nie mogą zmieniać swojego rozmiaru. Jeśli do Twojej tablicy, która aktualnie ma 5 elementów chcesz dodać kolejne 2, to będziesz musiał stworzyć nową, 7-mio elementową tablicę, skopiować 5 elementów z poprzedniej tablicy, a następnie możesz zrobić co chcesz z tymi dwoma nowymi. To stwarza potrzebę wielokrotnego alokowania i zwalniania pamięci dynamicznie. Może to wyglądać np. tak:
+Nie można utworzyć w ten sposób tablicy, której rozmiar nie jest znany w *compile-timie*. Musisz w tym przypadku zaalokować tablicę dynamicznie. Tablice w C++ jako tako nie mogą zmieniać swojego rozmiaru. Jeśli do Twojej tablicy, która aktualnie ma 5 elementów chcesz dodać kolejne 2, to będziesz musiał stworzyć nową, 7-mio elementową tablicę, skopiować 5 elementów z poprzedniej tablicy, a następnie możesz zrobić co chcesz z tymi dwoma nowymi. To stwarza potrzebę wielokrotnego alokowania i zwalniania pamięci dynamicznie. Może to wyglądać np. tak:
 
 <!-- Przykład: -->
 ```cpp
@@ -67,7 +67,7 @@ No dobrze, ale teraz ktoś może się odezwać i powiedzieć:
 
 > Przecież jak nie zapomnę tego zwolnić to wszystko będzie okej.
 
-To jest bardzo naiwne podejście, które często jest spotykane wśród nowicjuszy, które ja też kiedyś przejawiałem. Osoba, która ma takie podejście **nie umie zarządzać pamięcią**. O ile w języku `C`, używając `malloc` oraz `free` taki kod byłby bezpieczny, o tyle podejście w `C++` całkowicie się zmieniło wraz z wprowadzeniem programowania obiektowego oraz mechanizmu wyjątków. W skrócie: obiekty mają tzw. konstruktory i destruktory, czyli funkcje, które są wywoływane odpowiednio, bezpośrednio po utworzeniu oraz bezpośrednio przed usunięciem obiektu. Wyjątki to szczególne sytuacje w programie, kiedy coś poszło nie tak, np. nie ma pliku z teksturą... który miał być, a więc trzeba anulować wczytywanie tekstury i jakoś rozsądnie to rozwiązać, np. wstawiając w jej miejsce jakiś prosty kolor czy coś innego. No dobra, ale wyjątki mają to do siebie, że powodują wychodzenie kolejno z wykonywanych aktualnie funkcji, w dół "stosu wywołań funkcji", aż nie zostanie napotkany fragment kodu, który obsługuje wyjątek.
+To jest bardzo naiwne podejście, które często jest spotykane wśród nowicjuszy, które ja też kiedyś przejawiałem. Osoba, która ma takie podejście **nie umie zarządzać pamięcią**. O ile w języku `C`, używając `malloc` oraz `free` taki kod byłby bezpieczny, o tyle podejście w `C++` całkowicie się zmieniło wraz z wprowadzeniem programowania obiektowego oraz mechanizmu wyjątków. W skrócie: obiekty (a raczej klasy) mają tzw. konstruktory i destruktory, czyli funkcje, które są wywoływane odpowiednio, bezpośrednio po utworzeniu oraz bezpośrednio przed usunięciem obiektu. Wyjątki to szczególne sytuacje w programie, kiedy coś poszło nie tak, np. nie ma pliku z teksturą... który miał być, a więc trzeba anulować wczytywanie tekstury i jakoś rozsądnie to rozwiązać, np. wstawiając w jej miejsce jakiś prosty kolor czy coś innego. No dobra, ale wyjątki mają to do siebie, że powodują wychodzenie kolejno z wykonywanych aktualnie funkcji, w dół "stosu wywołań funkcji", aż nie zostanie napotkany fragment kodu, który obsługuje wyjątek.
 No i jeśli taki wyjątek nastąpi przykładowo... **tu**.
 
 <!--  Przykład, gdzie nastąpi: -->
@@ -106,4 +106,86 @@ No... Ty możesz nie rzucać samemu wyjątków, możesz uważać, że wszystko j
 
 ## Jak zarządzać poprawnie dynamiczną pamięcią?
 
-Wspominałem o tym, że istnieją obiekty, które posiadają konstruktory i destruktory. W momencie rzucenia wyjątku, zanim program wyjdzie z aktualnie wykonywanej funkcji, wywoła destruktory wszystkich obiektów, które **zaalokowaliśmy automatycznie**, czyli tak jak zwykłe zmienne. Ten proces określa się po angielsku przez "*stack unwinding*". Żeby mieć 100-procentową pewność, że wszystko jest poprawnie zwalniane, korzysta się właśnie z tego faktu - zwalnianie każdej pamięci powierzamy destruktorowi obiektu. Ta technika nosi nazwę "*RAII*", czyli po angielsku "*Resource Acquisition Is Initialization*" i oznacza to, że zarządzanie czasem życia zasobów alokowanych dynamicznie powierzamy konstruktorowi i destruktorowi obiektu. Należy zadbać o to, by **ZAWSZE** istniał co najmniej jeden obiekt, który jest jakby właścicielem pamięci, którą zwolni gdy sam będzie niszczony... czy to przez rzucenie wyjątku, czy przez zwykłe wyjście poza blok kodu, w którym został stworzony, czyli to o czym mówiłem na początku filmu, przy okazji alokacji automatycznej.
+Wspominałem o tym, że istnieją obiekty, które posiadają konstruktory i destruktory. W momencie rzucenia wyjątku, zanim program wyjdzie z aktualnie wykonywanej funkcji, wywoła destruktory wszystkich obiektów, które **zaalokowaliśmy automatycznie**, czyli tak jak zwykłe zmienne. Ten proces określa się po angielsku przez "*stack unwinding*". Żeby mieć 100-procentową pewność, że wszystko jest poprawnie zwalniane, korzysta się właśnie z tego faktu - zwalnianie każdej, dynamicznie zaalokowanej, pamięci powierzamy destruktorowi obiektu. Ta technika nosi nazwę "*RAII*", czyli po angielsku "*Resource Acquisition Is Initialization*" i oznacza to, że zarządzanie czasem życia zasobów alokowanych dynamicznie powierzamy konstruktorowi i destruktorowi obiektu. Należy zadbać o to, by **ZAWSZE** istniał co najmniej jeden obiekt, który jest jakby właścicielem pamięci, którą zwolni gdy sam będzie niszczony... czy to przez rzucenie wyjątku, czy przez zwykłe wyjście poza blok kodu, w którym został stworzony, czyli to o czym mówiłem na początku filmu, przy okazji alokacji automatycznej.
+
+Przykładem poprawnie wykonanego RAII dla tablicy może być coś takiego:
+
+<!-- Przykład RAII -->
+```cpp
+class DynamicArray
+{
+public:
+	// Konstruktor:
+	DynamicArray(int size_) {
+		// Powinno się też użyć listy inicjalizacyjnej.
+		ptr = new int[size_];
+	}
+	// Destruktor:
+	~DynamicArray() {
+		delete[] ptr;
+	}
+
+	int* ptr;
+};
+```
+<!-- Koniec przykładu RAII -->
+
+Wtedy nie musimy się martwić o to, że nasza tablica nie zostanie zwolniona w takim wypadku:
+
+<!-- Przykład -->
+```cpp
+{
+	DynamicArray arr(10);
+	throw std::runtime_error("jakis wyjatek");
+}
+```
+<!-- Koniec przykładu -->
+
+W praktyce, w `DynamicArray` brakuje jeszcze paru rzeczy, ale w tym filmie możemy to pominąć... bo rada dla programistów C++ jest taka, żeby korzystać z kontenerów z biblioteki standardowej. Jeśli potrzebujesz tablicy o zmiennym rozmiarze, użyj `std::vector`. Oto porównanie kodu wcześniejszego kodu z rzucaniem wyjątku i zmianą rozmiaru tablicy z kodem, który robi to samo... ale używa `std::vector` z biblioteki standardowej.
+
+<!--  Przykład, gdzie nastąpi: -->
+```cpp
+// Na początku programu:
+#include <vector>
+
+// Tablica 5-ciu elementów:
+std::vector<int> tab = {3, 2, 1, 5, 6};
+// Dodaj liczbe 8 na koniec
+tab.push_back(8);
+// Dodaj liczbe 10 na koniec
+tab.push_back(10);
+
+// Mimo rzucenia wyjątku, wszystko jest ładnie zwalniane.
+throw std::runtime_error("jakis wyjatek");
+
+```
+<!-- Koniec przykładu -->
+
+Prawda, że prościej, łatwiej i przyjemniej? Nie używajcie zwykłych zwykłych tablic.
+
+## Dynamiczna alokacja i obiekty
+
+Wiemy już co robić w przypadku tablic. A co jeśli chcemy stworzyć dynamicznie obiekt i mieć pewność, że zostanie poprawnie zwolniony? W tym wypadku również korzystamy z biblioteki standardowej i specjalnie przygotowanych inteligentnych wskaźników, po angielsku nazywanych *smart pointerami*. Smart pointery to specjalnie przygotowane klasy, tak jak wcześniej pokazane `DynamicArray`, które służą właśnie do tego, by automatycznie zarządzać zaalokowaną pamięcią. Należy teraz wprowadzić pojęcia:
+
+- owning pointer (wskaźnik właściciel)
+- non-owning pointer (wskaźnik niebędący właścicielem)
+
+Wskaźnik właściciel to właśnie inteligentny wskaźnik, który jest używany głównie do kontrolowania czasu życia obiektu.
+Wskaźnik niebędący właścicielem to zwykły wskaźnik taki jak znamy z C++, czyli mówiąc kolokwialnie "ten z gwiazdką".
+
+W C++ istnieją dwa inteligentne wskaźniki i jeden "pomocniczy" inteligentny wskaźnik:
+
+- unique_ptr - unikalny wskaźnik
+- shared_ptr - wskaźnik współdzielony
+- weak_ptr - "słaby" wskaźnik (pomocniczy)
+
+`unique_ptr` jest zawsze **JEDYNYM**, unikalnym właścicielem obiektu. To czas życia `unique_ptr` decyduje o tym, ile będzie żył obiekt, na który wskazuje. Niszczony jest wskaźnik, niszczony jest też obiekt. W zdecydowanej większości będziecie korzystać właśnie z tego typu smart pointera.
+
+`shared_ptr` jest jednym z wielu wskaźników, które wspólnie odnoszą się do jednego obiektu w pamięci. Kiedy `shared_ptr` jest niszczony, to działa to na zasadzie "ostatni zamyka drzwi", czyli dopiero ostatni `shared_ptr` niszczy też obiekt, na który wskazywał. Jest on wolniejszy niż `unique_ptr`, jednak czasem niezbędny, np. gdy nasz program posiada wiele wątków, z których chcemy dostać się do jednego obiektu w pamięci.
+
+`weak_ptr` to słaby wskaźnik, który współpracuje z `shared_ptr`-ami. Nie bierze on udziału w metodzie "ostatni zamyka drzwi". Nawet jeśli do danego obiektu w pamięci będzie istniało jeszcze 100 `weak_ptr`-ów, to wciąż, ostatni `shared_ptr` zwolni po sobie obiekt. `weak_ptr` służy do tego, by móc sprawdzić, czy obiekt, na który wskazuje, jeszcze istnieje... i jeśli tak, to możemy użyć go do stworzenia `shared_ptr`, żeby się do niego odwołać.
+
+Każdy z tych wskaźników znajdzie swoje zastosowanie, które zaraz pokażę.
+
+## Przykłady użycia unique_ptr
+
