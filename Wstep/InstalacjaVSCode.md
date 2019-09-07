@@ -8,7 +8,7 @@
 	- [Instalacja kompilatora GCC (MinGW-w64)](#instalacja-kompilatora-gcc-mingw-w64)
 - [Kompilacja i uruchamianie aplikacji w Visual Studio Code](#kompilacja-i-uruchamianie-aplikacji-w-visual-studio-code)
 
-Programowanie sprowadza się przede wszystim do pisania kodu,
+Programowanie sprowadza się przede wszystkim do pisania kodu,
 który zapiszemy do pliku tekstowego o rozszerzeniu `.cpp`.
 Możemy do tego korzystać nawet z prostego notatnika:
 
@@ -54,10 +54,10 @@ możesz też otworzyć folder już po uruchomieniu VS Code (2).
 ![Otwieranie folderu w edytorze](Images/NewProjectVSCode.png)
 
 Teraz, za pomocą skrótu `Ctrl + N` lub menu `File -> New File`
-utwórz nowy plik i zapisz go z nazwą "`Main.cpp`".
+utwórz nowy plik i zapisz go z nazwą "`Main.cpp`". Przyjęło się
+nadawać właśnie tą nazwę głównemu plikowi z kodem źródłowym programu.
 Edytor najprawdopodobniej zaproponuje Ci instalację dodatku
-o nazwie "`C/C++`", zrób to. Przyjęło się nadawać właśnie tą
-nazwę głównemu plikowi z kodem źródłowym programu.
+o nazwie "`C/C++`", zrób to. 
 Zapisz do niego ten kod:
 
 ```cpp
